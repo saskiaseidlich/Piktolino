@@ -167,6 +167,52 @@
             .card { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; -webkit-mask-image: none; mask-image: none; }
             .card.stopword-card { border: 2px dashed #ccc; }
         }
+		/* --- RESPONSIVE DESIGN FÜR MOBILGERÄTE --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px; /* Weniger Abstand zum Rand auf kleinen Bildschirmen */
+            }
+
+            header {
+                padding: 20px 10px;
+            }
+
+            h1.display-font {
+                font-size: 2.5rem; /* Schriftgröße des Titels leicht verkleinern */
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            /* Die Setzleiste bricht auf dem Handy automatisch um, 
+               damit man nicht horizontal scrollen muss */
+            #setzleiste {
+                flex-wrap: wrap; 
+                justify-content: center;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            /* Die einzelnen Wortkarten werden auf dem Handy etwas kompakter */
+            .wort-karte {
+                width: 100px;
+                padding: 8px;
+            }
+
+            .wort-karte img {
+                height: 70px;
+            }
+
+            /* Das absolut positionierte Logo unten rechts verkleinern, 
+               damit es auf dem Handy nicht den Inhalt verdeckt */
+            img[alt="Piktolino Logo"] {
+                height: 70px;
+                right: 15px;
+                bottom: 50px;
+                opacity: 0.5; /* Noch etwas dezentere Transparenz auf dem Handy */
+            }
+        }
     </style>
 </head>
 <body>
