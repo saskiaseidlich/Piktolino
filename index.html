@@ -233,8 +233,7 @@
             <textarea id="sentence-input" placeholder="Geben Sie hier einen deutschen Satz ein (z. B. 'Das Mädchen kauft eine Limonade.')..."></textarea>
             <div class="controls">
                 <button onclick="generateSetzleiste()">Symbole erzeugen</button>
-                <button class="btn-secondary" onclick="copyAsImage()" id="copy-img-btn" title="Als zusammenhängendes Bild für Word kopieren">📋 Bild kopieren</button>
-                <button class="btn-secondary" onclick="window.print()" title="Als PDF speichern oder ausdrucken">🖨️ Drucken / PDF</button>
+                <button class="btn-secondary" onclick="copyAsImage()" id="copy-img-btn" title="Als zusammenhängendes Bild für Word kopieren">📋 Setzleiste kopieren</button>
                 <button class="btn-secondary" onclick="clearState()" title="Alles löschen">🗑️ Leeren</button>
                 <button class="btn-secondary" onclick="openHelpModal()" title="Hilfe zur Bedienung">❓ Hilfe</button>
                 <span id="status-text">Bereit für einen neuen Satz.</span>
@@ -247,6 +246,7 @@
             position: absolute; 
             bottom: 60px; 
             right: 40px; 
+            height: 170px; 
             height: 170px; 
             object-fit: contain; 
             opacity: 0.85; 
@@ -279,7 +279,7 @@
                 <li><strong>Symbole anpassen:</strong> Klicke auf eine beliebige Karte, um aus Alternativ-Symbolen zu wählen oder nach einem komplett anderen Begriff (z. B. "laufen" statt "läuft") zu suchen.</li>
                 <li><strong>Drag & Drop:</strong> Du kannst die generierten Wortkarten mit der Maus anklicken, festhalten und verschieben, um den Satzbau anzupassen.</li>
                 <li><strong>Funktionswörter:</strong> Wörter wie <em>"der", "und", "in"</em> werden automatisch ohne Bild und gestrichelt dargestellt. Du kannst aber per Klick trotzdem ein Bild dafür suchen.</li>
-                <li><strong>Exportieren:</strong> Nutze <em>"Bild kopieren"</em>, um die fertige Setzleiste direkt in Microsoft Word oder Worksheet Crafter einzufügen. Mit <em>"Drucken / PDF"</em> kannst du sie sichern.</li>
+                <li><strong>Exportieren:</strong> Nutze <em>"Setzleiste kopieren"</em>, um die fertige Setzleiste direkt in Microsoft Word oder Worksheet Crafter einzufügen.</li>
             </ul>
             <div class="modal-actions">
                 <button class="btn-secondary" onclick="closeHelpModal()">Alles klar!</button>
