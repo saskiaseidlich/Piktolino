@@ -118,6 +118,31 @@
         .card:hover, .card:focus-within { box-shadow: 0 0 0 3px var(--accent-amber); transform: translateY(-2px); }
         .card:active { cursor: grabbing; }
 
+        /* NEU: Das Lösch-X oben rechts an der Karte */
+       .card-delete-btn {
+		position: absolute;
+		top: 4px;
+		right: 6px;
+		width: auto;
+		height: auto;
+		background: transparent; /* Kein Kreis-Hintergrund mehr! */
+		color: #94a3b8;           /* Dezent graue Farbe */
+		border: none;
+		padding: 0;
+		font-size: 14px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		z-index: 10;
+		line-height: 1;
+		}
+
+.card-delete-btn:hover {
+    color: #ef4444;           /* Wird rot beim Drüberfahren */
+    transform: scale(1.25);   /* Wird leicht größer */
+    background: transparent;
+}
+
         .card.dragging { opacity: 0.4; transform: scale(0.95); }
         .card.drag-over { border: 2px dashed var(--accent-amber); transform: scale(1.05); }
 
@@ -160,7 +185,7 @@
         /* --- DRUCK & PDF-EXPORT STYLES --- */
         @media print {
             body { background: #ffffff; color: #000000; }
-            .input-section, footer, .modal-overlay, .manual-search-link, .pic-placeholder.error span { display: none !important; }
+            .input-section, footer, .modal-overlay, .manual-search-link, .pic-placeholder.error span, .card-delete-btn { display: none !important; }
             header { padding: 10px 0; background: none; border: none; box-shadow: none; }
             header h1 { font-size: 2rem; color: #000; }
             #setzleiste { padding: 0; }
@@ -170,7 +195,7 @@
 		/* --- RESPONSIVE DESIGN FÜR MOBILGERÄTE --- */
         @media (max-width: 768px) {
             body {
-                padding: 10px; /* Weniger Abstand zum Rand auf kleinen Bildschirmen */
+                padding: 10px;
             }
 
             header {
@@ -178,15 +203,13 @@
             }
 
             h1.display-font {
-                font-size: 2.5rem; /* Schriftgröße des Titels leicht verkleinern */
+                font-size: 2.5rem;
             }
 
             .subtitle {
                 font-size: 1rem;
             }
 
-            /* Die Setzleiste bricht auf dem Handy automatisch um, 
-               damit man nicht horizontal scrollen muss */
             #setzleiste {
                 flex-wrap: wrap; 
                 justify-content: center;
@@ -194,7 +217,6 @@
                 padding: 15px;
             }
 
-            /* Die einzelnen Wortkarten werden auf dem Handy etwas kompakter */
             .wort-karte {
                 width: 100px;
                 padding: 8px;
@@ -204,13 +226,11 @@
                 height: 70px;
             }
 
-            /* Das absolut positionierte Logo unten rechts verkleinern, 
-               damit es auf dem Handy nicht den Inhalt verdeckt */
             img[alt="Piktolino Logo"] {
                 height: 70px;
                 right: 15px;
                 bottom: 50px;
-                opacity: 0.5; /* Noch etwas dezentere Transparenz auf dem Handy */
+                opacity: 0.5;
             }
         }
     </style>
@@ -219,8 +239,6 @@
 
    <header>
     <div class="header-content" style="display: flex; align-items: center; gap: 15px;">
-       
-        
         <div>
             <h1 class="display-font" style="margin: 0;">Piktolino</h1>
             <p class="subtitle" style="margin: 5px 0 0 0;">Der Text-zu-Symbol-Generator für barrierefreie Kommunikation</p>
@@ -241,8 +259,6 @@
         </div>
 
         <div id="setzleiste"></div>
-		
-	
     </main>
 
     <div id="edit-modal-overlay" class="modal-overlay">
@@ -266,11 +282,12 @@
             <h3 class="display-font">Willkommen bei Piktolino!</h3>
             <p>So funktioniert die digitale Setzleiste:</p>
             <ul class="help-list">
-                <li><strong>Satz eingeben:</strong> Tippe einfach einen deutschen Satz in das Textfeld und klicke auf "Symbole erzeugen".</li>
-                <li><strong>Symbole anpassen:</strong> Klicke auf eine beliebige Karte, um aus Alternativ-Symbolen zu wählen oder nach einem komplett anderen Begriff (z. B. "laufen" statt "läuft") zu suchen.</li>
+                <li><strong>Satz eingeben:</strong> Tippe einfach einen deutschen Satz in das Textfeld und klicke auf "Symbole erzeugen" (oder drücke einfach Enter).</li>
+                <li><strong>Wort löschen:</strong> Klicke auf das kleine ✖ oben rechts an einer Karte, um das Wort samt Symbol zu entfernen.</li>
+                <li><strong>Symbole anpassen:</strong> Klicke auf eine beliebige Karte, um aus Alternativ-Symbolen zu wählen oder nach einem komplett anderen Begriff zu suchen.</li>
                 <li><strong>Drag & Drop:</strong> Du kannst die generierten Wortkarten mit der Maus anklicken, festhalten und verschieben, um den Satzbau anzupassen.</li>
                 <li><strong>Funktionswörter:</strong> Wörter wie <em>"der", "und", "in"</em> werden automatisch ohne Bild und gestrichelt dargestellt. Du kannst aber per Klick trotzdem ein Bild dafür suchen.</li>
-                <li><strong>Exportieren:</strong> Nutze <em>"Setzleiste kopieren"</em>, um die fertige Setzleiste direkt in Microsoft Word oder Worksheet Crafter einzufügen.</li>
+                <li><strong>Exportieren:</strong> Nutze <em>"Setzleiste kopieren"</em>, um die fertige Setzleiste direkt in Microsoft Word einzufügen.</li>
             </ul>
             <div class="modal-actions">
                 <button class="btn-secondary" onclick="closeHelpModal()">Alles klar!</button>
@@ -313,6 +330,17 @@
                         setStatusText("Letzter Stand geladen. (Drag & Drop zum Sortieren)");
                     }
                 } catch(e) { console.error("Speicher Fehler.", e); }
+            }
+
+            // --- ENTER-TASTE LOGIK FÜR DAS TEXTFELD ---
+            const inputField = document.getElementById('sentence-input');
+            if (inputField) {
+                inputField.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' && !event.shiftKey) {
+                        event.preventDefault();
+                        generateSetzleiste();
+                    }
+                });
             }
         });
 
@@ -407,6 +435,28 @@
             renderBoard();
         }
 
+        /* --- NEU: FUNKTION ZUM EINZELNEN LÖSCHEN EINER KARTE SAMT WORT --- */
+        function deleteCard(event, index) {
+            event.stopPropagation(); // Verhindert, dass sich das Bearbeiten-Modal öffnet beim Klick aufs X
+            
+            // 1. Wort aus dem boardState entfernen
+            boardState.splice(index, 1);
+
+            // 2. Textfeld oben synchronisieren
+            const newSentence = boardState.map(item => item.original).join(' ');
+            document.getElementById('sentence-input').value = newSentence;
+
+            // 3. Zustand speichern & neu rendern
+            saveState();
+            renderBoard();
+
+            if (boardState.length === 0) {
+                setStatusText('Bereit für einen neuen Satz.');
+            } else {
+                setStatusText('Wort entfernt.');
+            }
+        }
+
         function renderBoard() {
             const container = document.getElementById('setzleiste');
             container.innerHTML = ''; 
@@ -431,6 +481,11 @@
                     if (dragStartIndex !== -1 && dragStartIndex !== idx) {
                         const draggedItem = boardState.splice(dragStartIndex, 1)[0];
                         boardState.splice(idx, 0, draggedItem);
+                        
+                        // Textfeld oben nach Drag & Drop neu sortieren
+                        const newSentence = boardState.map(i => i.original).join(' ');
+                        document.getElementById('sentence-input').value = newSentence;
+
                         saveState();
                         renderBoard();
                     }
@@ -449,7 +504,12 @@
                     topContent = `<div class="pic-placeholder error">Kein Treffer<br><span style="font-size:0.8em">(Klick zum Ändern)</span></div>`;
                 }
 
-                card.innerHTML = `<div class="card-top">${topContent}</div><div class="card-word">${item.prefix}<span class="core-word">${item.core}</span>${item.suffix}</div>`;
+                // Einbau des Lösch-X-Buttons oben rechts an jeder Karte:
+                card.innerHTML = `
+                    <button class="card-delete-btn" onclick="deleteCard(event, ${idx})" title="Wort löschen">✖</button>
+                    <div class="card-top">${topContent}</div>
+                    <div class="card-word">${item.prefix}<span class="core-word">${item.core}</span>${item.suffix}</div>
+                `;
                 container.appendChild(card);
             });
         }
