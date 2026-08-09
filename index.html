@@ -40,14 +40,14 @@
             --text-primary: #f5f7fa;
             --text-secondary: #cbd5e1;
             --header-title-color: #4ecdc4;
-            --header-subtitle-color: #e2e8f0;
+            --header-subtitle-color: #f1f5f9;
             --card-bg: #1f2937;
-            --input-bg: #111827;
+            --input-bg: #e9ecef;
             --plan-slot-bg: #172133;
             --plan-slot-filled-bg: rgba(92, 191, 172, 0.18);
             --placeholder-bg: #18232f;
             --footer-bg: #111827;
-            --border-color: #334155;
+            --border-color: #ced4da;
             --shadow-color: rgba(0,0,0,0.6);
             --button-secondary-bg: #475569;
             --button-secondary-hover: #64748b;
@@ -63,12 +63,15 @@
                 --page-bg: #12161b;
                 --text-primary: #f5f7fa;
                 --text-secondary: #cbd5e1;
+                --header-title-color: #4ecdc4;
+                --header-subtitle-color: #f1f5f9;
                 --card-bg: #1f2937;
-                --input-bg: #111827;
+                --input-bg: #e9ecef;
                 --plan-slot-bg: #172133;
+                --plan-slot-filled-bg: rgba(92, 191, 172, 0.18);
                 --placeholder-bg: #18232f;
                 --footer-bg: #111827;
-                --border-color: #334155;
+                --border-color: #ced4da;
                 --shadow-color: rgba(0,0,0,0.6);
                 --button-secondary-bg: #475569;
                 --button-secondary-hover: #64748b;
@@ -193,7 +196,7 @@
         }
 
         textarea {
-            width: 100%; height: 80px; font-family: inherit; font-size: 1.2rem; color: var(--text-primary); padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; resize: vertical; box-sizing: border-box; margin-bottom: 15px;
+            width: 100%; height: 80px; font-family: inherit; font-size: 1.2rem; color: #212529; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; resize: vertical; box-sizing: border-box; margin-bottom: 15px; background: var(--input-bg);
         }
         textarea:focus {
             outline: none; border-color: var(--accent-amber); box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.3);
@@ -398,7 +401,7 @@
             padding: 10px 12px;
             font: inherit;
             background: var(--input-bg);
-            color: var(--text-primary);
+            color: #212529;
         }
 
         .plan-slot .slot-delete-btn {
@@ -508,7 +511,7 @@
         .alt-gallery img { width: 80px; height: 80px; object-fit: contain; border: 2px solid var(--border-color); border-radius: 4px; cursor: pointer; transition: border-color 0.1s; }
         .alt-gallery img:hover { border-color: var(--accent-amber); }
         .custom-search-box { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
-        .custom-search-box input { flex: 1; padding: 10px; font-family: inherit; border: 1px solid var(--border-color); border-radius: 4px; }
+        .custom-search-box input { flex: 1; padding: 10px; font-family: inherit; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: #212529; }
         .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 
         .help-list { list-style: none; padding: 0; margin: 0; }
