@@ -13,21 +13,74 @@
     <style>
         /* Farbvariablen */
         :root {
-           --bg-cream: #f9f7f1;
-            --text-dark: #2c3e50;
+            --page-bg: #f9f7f1;
+            --text-primary: #2c3e50;
+            --text-secondary: #475569;
+            --header-title-color: var(--accent-green);
+            --header-subtitle-color: var(--text-secondary);
             --accent-green: #5cbfac;         /* Dein exakter Logo-Farbton! */
             --accent-green-hover: #47a696;   /* Der perfekt passende, dunklere Hover-Ton */
             --accent-amber: #ffbf00;
             --accent-amber-hover: #e6ac00;
             --card-bg: #ffffff;
+            --input-bg: #ffffff;
+            --plan-slot-bg: #fcf8ef;
+            --plan-slot-filled-bg: #effaf7;
+            --placeholder-bg: #f1f5f9;
+            --footer-bg: #e2e8f0;
             --border-color: #d1d9e0;
+            --shadow-color: rgba(0,0,0,0.05);
+            --button-secondary-bg: #64748b;
+            --button-secondary-hover: #475569;
+            --text-muted: #64748b;
+        }
+
+        body.dark-theme {
+            --page-bg: #12161b;
+            --text-primary: #f5f7fa;
+            --text-secondary: #cbd5e1;
+            --header-title-color: #4ecdc4;
+            --header-subtitle-color: #e2e8f0;
+            --card-bg: #1f2937;
+            --input-bg: #111827;
+            --plan-slot-bg: #172133;
+            --plan-slot-filled-bg: rgba(92, 191, 172, 0.18);
+            --placeholder-bg: #18232f;
+            --footer-bg: #111827;
+            --border-color: #334155;
+            --shadow-color: rgba(0,0,0,0.6);
+            --button-secondary-bg: #475569;
+            --button-secondary-hover: #64748b;
+            --text-muted: #94a3b8;
+        }
+
+        body.system-theme {
+            /* System mode uses default light values until the OS switches to dark */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body.system-theme {
+                --page-bg: #12161b;
+                --text-primary: #f5f7fa;
+                --text-secondary: #cbd5e1;
+                --card-bg: #1f2937;
+                --input-bg: #111827;
+                --plan-slot-bg: #172133;
+                --placeholder-bg: #18232f;
+                --footer-bg: #111827;
+                --border-color: #334155;
+                --shadow-color: rgba(0,0,0,0.6);
+                --button-secondary-bg: #475569;
+                --button-secondary-hover: #64748b;
+                --text-muted: #94a3b8;
+            }
         }
 
         /* Globale Stile */
         body {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
+            background-color: var(--page-bg);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -49,19 +102,85 @@
             );
             border-left: 16px solid var(--accent-green);
             padding: 20px 40px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px var(--shadow-color);
         }
 
         .header-content {
-           background-color: transparent; /* Entfernt den blockierenden weißen Kasten */
-            display: inline-block;
+            background-color: transparent; /* Entfernt den blockierenden weißen Kasten */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            width: 100%;
             padding: 0 15px;
-            /* Ein feiner weißer Schein sorgt dafür, dass die Schrift vor den Linien super lesbar bleibt */
-            text-shadow: 0 0 8px #ffffff, 0 0 4px #ffffff;
         }
 
-        header h1 { margin: 0; font-size: 2.8rem; line-height: 1.1; }
-        header p.subtitle { margin: 5px 0 0 0; font-weight: 700; color: var(--text-dark); font-size: 1.1rem; }
+        .theme-switcher {
+            position: relative;
+            margin-left: auto;
+        }
+
+        #theme-toggle {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            width: 46px;
+            height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        #theme-toggle:hover,
+        #theme-toggle:focus {
+            transform: translateY(-1px);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(92, 191, 172, 0.18);
+        }
+
+        .theme-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            min-width: 190px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+            padding: 8px 0;
+            z-index: 30;
+        }
+
+        .theme-menu button {
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font: inherit;
+            padding: 10px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.15s ease;
+        }
+
+        .theme-menu button:hover,
+        .theme-menu button.active {
+            background: rgba(92, 191, 172, 0.12);
+        }
+
+        .theme-menu[hidden] {
+            display: none;
+        }
+
+        header h1 { margin: 0; font-size: 2.8rem; line-height: 1.1; color: var(--header-title-color); }
+        header p.subtitle { margin: 5px 0 0 0; font-weight: 700; color: var(--header-subtitle-color); font-size: 1.1rem; }
 
         /* Hauptinhalt Container */
         main {
@@ -74,7 +193,7 @@
         }
 
         textarea {
-            width: 100%; height: 80px; font-family: inherit; font-size: 1.2rem; color: var(--text-dark); padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; resize: vertical; box-sizing: border-box; margin-bottom: 15px;
+            width: 100%; height: 80px; font-family: inherit; font-size: 1.2rem; color: var(--text-primary); padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; resize: vertical; box-sizing: border-box; margin-bottom: 15px;
         }
         textarea:focus {
             outline: none; border-color: var(--accent-amber); box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.3);
@@ -102,10 +221,10 @@
         button:hover, button:focus { background-color: var(--accent-green-hover); outline: none; box-shadow: 0 0 0 4px rgba(255, 191, 0, 0.5); }
         button:disabled { opacity: 0.6; cursor: not-allowed; }
         
-        button.btn-secondary { background-color: #64748b; }
-        button.btn-secondary:hover:not(:disabled) { background-color: #475569; }
+        button.btn-secondary { background-color: var(--button-secondary-bg); }
+        button.btn-secondary:hover:not(:disabled) { background-color: var(--button-secondary-hover); }
 
-        #status-text { font-size: 0.95rem; color: #555; margin-left: auto; }
+        #status-text { font-size: 0.95rem; color: var(--text-muted); margin-left: auto; }
 
         /* Setzleiste (Karten-Layout) */
         #setzleiste { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end; padding-bottom: 20px; min-height: 150px; }
@@ -157,7 +276,7 @@
             justify-content: space-between;
             text-align: left;
             border: 1px solid var(--border-color);
-            background: white;
+            background: var(--card-bg);
             color: var(--accent-green);
             padding: 18px 20px;
             border-radius: 12px;
@@ -169,12 +288,12 @@
 
         .daily-plan-toggle:hover,
         .daily-plan-toggle.open {
-            background: #f5fdf9;
+            background: var(--card-bg);
         }
 
         .daily-plan-toggle .toggle-hint {
             font-weight: 400;
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 0.95rem;
             margin-left: 12px;
         }
@@ -194,7 +313,7 @@
 
         .daily-plan-section {
             background: var(--card-bg);
-            border: 1px solid #d1d9e0;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(92, 191, 172, 0.08);
             padding: 24px;
@@ -207,7 +326,7 @@
 
         .daily-plan-section p {
             margin: 0 0 20px 0;
-            color: #475569;
+            color: var(--text-secondary);
             font-size: 0.98rem;
             line-height: 1.5;
         }
@@ -223,7 +342,7 @@
 
         .daily-plan-controls label {
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-primary);
         }
 
         .daily-plan-controls select {
@@ -231,8 +350,8 @@
             padding: 10px 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            background: white;
-            color: var(--text-dark);
+            background: var(--input-bg);
+            color: var(--text-primary);
             font: inherit;
             cursor: pointer;
         }
@@ -259,9 +378,9 @@
             min-height: 220px;
             min-width: 320px;
             flex: 0 0 320px;
-            border: 2px dashed #d1d9e0;
+            border: 2px dashed var(--border-color);
             border-radius: 16px;
-            background: #fcf8ef;
+            background: var(--plan-slot-bg);
             padding: 24px 16px 16px;
             display: flex;
             flex-direction: column;
@@ -278,8 +397,8 @@
             border-radius: 10px;
             padding: 10px 12px;
             font: inherit;
-            color: var(--text-dark);
-            background: white;
+            background: var(--input-bg);
+            color: var(--text-primary);
         }
 
         .plan-slot .slot-delete-btn {
@@ -289,10 +408,10 @@
             width: 28px;
             height: 28px;
             padding: 0;
-            border: 1px solid #d1d9e0;
+            border: 1px solid var(--border-color);
             border-radius: 50%;
-            background: white;
-            color: #64748b;
+            background: var(--card-bg);
+            color: var(--text-muted);
             font-size: 16px;
             line-height: 1;
             display: grid;
@@ -304,38 +423,13 @@
         .plan-slot .slot-delete-btn:hover {
             border-color: #ef4444;
             color: #ef4444;
-            background: #fff2f2;
+            background: rgba(239, 68, 68, 0.12);
         }
 
         .plan-copy-btn {
             margin-top: 20px;
             width: 100%;
             justify-content: center;
-        }
-
-        .plan-slot .slot-delete-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 28px;
-            height: 28px;
-            padding: 0;
-            border: 1px solid #d1d9e0;
-            border-radius: 50%;
-            background: white;
-            color: #64748b;
-            font-size: 16px;
-            line-height: 1;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .plan-slot .slot-delete-btn:hover {
-            border-color: #ef4444;
-            color: #ef4444;
-            background: #fff2f2;
         }
 
         .plan-slot .slot-search-row {
@@ -365,10 +459,10 @@
             gap: 10px;
             border-radius: 12px;
             padding: 12px;
-            background: #ffffff;
+            background: var(--card-bg);
             min-height: 80px;
             text-align: center;
-            color: #475569;
+            color: var(--text-secondary);
         }
 
         .plan-slot .slot-preview img {
@@ -379,13 +473,13 @@
 
         .plan-slot .slot-status {
             font-size: 0.92rem;
-            color: #64748b;
+            color: var(--text-muted);
             min-height: 20px;
         }
 
         .plan-slot.filled {
             border-color: var(--accent-green);
-            background: #effaf7;
+            background: var(--plan-slot-filled-bg);
         }
 
         .plan-slot.error {
@@ -393,14 +487,14 @@
         }
 
         .pictogram { width: 100px; height: 100px; object-fit: contain; border-radius: 4px; pointer-events: none; }
-        .pic-placeholder { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; background-color: #f1f5f9; border-radius: 4px; font-size: 0.85em; color: #64748b; padding: 5px; box-sizing: border-box; }
+        .pic-placeholder { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; background-color: var(--placeholder-bg); border-radius: 4px; font-size: 0.85em; color: var(--text-muted); padding: 5px; box-sizing: border-box; }
         .pic-placeholder.error { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
 
         .manual-search-link { font-size: 0.85em; color: var(--accent-green); text-decoration: underline; cursor: pointer; text-align: center; padding: 10px; width: 90px; }
         .manual-search-link:hover { color: var(--accent-amber); }
 
         .card-word { font-weight: 700; font-size: 1.2rem; text-align: center; pointer-events: none; }
-        .core-word { color: var(--text-dark); }
+        .core-word { color: var(--text-primary); }
 
         /* Modals */
         .modal-overlay {
@@ -411,7 +505,7 @@
         .modal-content h3 { margin-top: 0; font-size: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
         
         .alt-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-        .alt-gallery img { width: 80px; height: 80px; object-fit: contain; border: 2px solid #e2e8f0; border-radius: 4px; cursor: pointer; transition: border-color 0.1s; }
+        .alt-gallery img { width: 80px; height: 80px; object-fit: contain; border: 2px solid var(--border-color); border-radius: 4px; cursor: pointer; transition: border-color 0.1s; }
         .alt-gallery img:hover { border-color: var(--accent-amber); }
         .custom-search-box { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
         .custom-search-box input { flex: 1; padding: 10px; font-family: inherit; border: 1px solid var(--border-color); border-radius: 4px; }
@@ -422,7 +516,7 @@
         .help-list li::before { content: "💡"; position: absolute; left: 0; top: 0; }
 
         /* Footer */
-        footer { background-color: #e2e8f0; text-align: center; padding: 15px 20px; font-size: 0.85rem; color: #475569; margin-top: auto; }
+        footer { background-color: var(--footer-bg); text-align: center; padding: 15px 20px; font-size: 0.85rem; color: var(--text-secondary); margin-top: auto; }
 
         /* --- DRUCK & PDF-EXPORT STYLES --- */
         @media print {
@@ -480,10 +574,18 @@
 <body>
 
    <header>
-    <div class="header-content" style="display: flex; align-items: center; gap: 15px;">
+    <div class="header-content">
         <div>
             <h1 class="display-font" style="margin: 0;">Piktolino</h1>
             <p class="subtitle" style="margin: 5px 0 0 0;">Der Text-zu-Symbol-Generator für barrierefreie Kommunikation</p>
+        </div>
+        <div class="theme-switcher">
+            <button id="theme-toggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu" aria-label="Design auswählen" onclick="toggleThemeMenu()">☀️</button>
+            <div id="theme-menu" class="theme-menu" hidden>
+                <button type="button" data-theme="system" onclick="setTheme('system')">💻 Systemstandard</button>
+                <button type="button" data-theme="light" onclick="setTheme('light')">☀️ Hell</button>
+                <button type="button" data-theme="dark" onclick="setTheme('dark')">🌙 Dunkel</button>
+            </div>
         </div>
     </div>
 </header>
@@ -616,6 +718,7 @@
                 });
             }
 
+            initTheme();
             renderDailyPlan();
         });
 
@@ -647,9 +750,78 @@
         function setStatusText(text, isSuccess = false) {
             const el = document.getElementById('status-text');
             el.innerHTML = text;
-            el.style.color = isSuccess ? "#355e3b" : "#555";
+            el.style.color = isSuccess ? "#355e3b" : "var(--text-muted)";
             el.style.fontWeight = isSuccess ? "bold" : "normal";
         }
+
+        const themePreferenceKey = 'easyReadTheme';
+
+        function applyThemePreference(pref) {
+            const body = document.body;
+            const toggle = document.getElementById('theme-toggle');
+            const menu = document.getElementById('theme-menu');
+
+            body.classList.remove('dark-theme', 'system-theme');
+            if (pref === 'dark') {
+                body.classList.add('dark-theme');
+                toggle.textContent = '☀️';
+            } else if (pref === 'light') {
+                toggle.textContent = '🌙';
+            } else {
+                body.classList.add('system-theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                toggle.textContent = prefersDark ? '☀️' : '🌙';
+            }
+
+            toggle.setAttribute('aria-label', `Design auswählen (${pref === 'system' ? 'Systemstandard' : pref === 'dark' ? 'Dunkel' : 'Hell'})`);
+            if (menu) {
+                menu.querySelectorAll('button').forEach(button => {
+                    button.classList.toggle('active', button.dataset.theme === pref);
+                });
+            }
+        }
+
+        function setTheme(pref) {
+            localStorage.setItem(themePreferenceKey, pref);
+            applyThemePreference(pref);
+            closeThemeMenu();
+        }
+
+        function initTheme() {
+            const savedPreference = localStorage.getItem(themePreferenceKey) || 'system';
+            applyThemePreference(savedPreference);
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const current = localStorage.getItem(themePreferenceKey) || 'system';
+                if (current === 'system') applyThemePreference('system');
+            });
+        }
+
+        function toggleThemeMenu() {
+            const menu = document.getElementById('theme-menu');
+            const toggle = document.getElementById('theme-toggle');
+            const isHidden = menu.hasAttribute('hidden');
+            if (isHidden) {
+                menu.removeAttribute('hidden');
+                toggle.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.setAttribute('hidden', '');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function closeThemeMenu() {
+            const menu = document.getElementById('theme-menu');
+            const toggle = document.getElementById('theme-toggle');
+            if (menu) menu.setAttribute('hidden', '');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        document.addEventListener('click', (event) => {
+            const switcher = document.querySelector('.theme-switcher');
+            if (switcher && !switcher.contains(event.target)) {
+                closeThemeMenu();
+            }
+        });
 
         async function fetchArasaacAPI(word) {
             try {
