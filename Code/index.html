@@ -150,6 +150,248 @@
             background-color: transparent; border: 2px dashed #a0aec0; box-shadow: none; -webkit-mask-image: none; mask-image: none; padding-top: 10px;
         }
 
+        .daily-plan-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--accent-green);
+            padding: 18px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(92, 191, 172, 0.08);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .daily-plan-toggle:hover,
+        .daily-plan-toggle.open {
+            background: #f5fdf9;
+        }
+
+        .daily-plan-toggle .toggle-hint {
+            font-weight: 400;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-left: 12px;
+        }
+
+        .daily-plan-panel {
+            margin-top: 18px;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.25s ease;
+        }
+
+        .daily-plan-panel.open {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        .daily-plan-section {
+            background: var(--card-bg);
+            border: 1px solid #d1d9e0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(92, 191, 172, 0.08);
+            padding: 24px;
+        }
+
+        .daily-plan-section h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.7rem;
+        }
+
+        .daily-plan-section p {
+            margin: 0 0 20px 0;
+            color: #475569;
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .daily-plan-controls {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .daily-plan-controls label {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .daily-plan-controls select {
+            min-width: 120px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-dark);
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .daily-plan-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 16px;
+            padding-bottom: 10px;
+        }
+
+        .daily-plan-grid::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .daily-plan-grid::-webkit-scrollbar-thumb {
+            background: rgba(92, 191, 172, 0.35);
+            border-radius: 10px;
+        }
+
+        .plan-slot {
+            position: relative;
+            min-height: 220px;
+            min-width: 320px;
+            flex: 0 0 320px;
+            border: 2px dashed #d1d9e0;
+            border-radius: 16px;
+            background: #fcf8ef;
+            padding: 24px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .plan-slot .slot-label-input,
+        .plan-slot .slot-search-input {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font: inherit;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        .plan-slot .slot-delete-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 1px solid #d1d9e0;
+            border-radius: 50%;
+            background: white;
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .plan-slot .slot-delete-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: #fff2f2;
+        }
+
+        .plan-copy-btn {
+            margin-top: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .plan-slot .slot-delete-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 1px solid #d1d9e0;
+            border-radius: 50%;
+            background: white;
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .plan-slot .slot-delete-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: #fff2f2;
+        }
+
+        .plan-slot .slot-search-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .plan-slot .slot-search-btn {
+            border: none;
+            background: var(--accent-green);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .plan-slot .slot-search-btn:hover {
+            background: var(--accent-green-hover);
+        }
+
+        .plan-slot .slot-preview {
+            flex: 1;
+            display: grid;
+            place-items: center;
+            gap: 10px;
+            border-radius: 12px;
+            padding: 12px;
+            background: #ffffff;
+            min-height: 80px;
+            text-align: center;
+            color: #475569;
+        }
+
+        .plan-slot .slot-preview img {
+            max-width: 100%;
+            max-height: 90px;
+            border-radius: 8px;
+        }
+
+        .plan-slot .slot-status {
+            font-size: 0.92rem;
+            color: #64748b;
+            min-height: 20px;
+        }
+
+        .plan-slot.filled {
+            border-color: var(--accent-green);
+            background: #effaf7;
+        }
+
+        .plan-slot.error {
+            border-color: #ef4444;
+        }
+
         .pictogram { width: 100px; height: 100px; object-fit: contain; border-radius: 4px; pointer-events: none; }
         .pic-placeholder { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; background-color: #f1f5f9; border-radius: 4px; font-size: 0.85em; color: #64748b; padding: 5px; box-sizing: border-box; }
         .pic-placeholder.error { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
@@ -259,6 +501,31 @@
         </div>
 
         <div id="setzleiste"></div>
+
+        <button id="daily-plan-toggle" class="daily-plan-toggle" type="button" onclick="toggleDailyPlan()" aria-expanded="false" aria-controls="daily-plan-panel">
+            📅 Arbeitsblatt-Vorlage: Tagesplan
+            <span class="toggle-hint">Klicken zum Ausklappen</span>
+        </button>
+
+        <div id="daily-plan-panel" class="daily-plan-panel">
+            <section class="daily-plan-section" aria-labelledby="daily-plan-title">
+                <h2 id="daily-plan-title">Arbeitsblatt-Vorlage: Tagesplan</h2>
+                <p>Wähle die Anzahl der Schulstunden/Schritte und suche das passende Piktogramm direkt pro Feld.</p>
+                <div class="daily-plan-controls">
+                    <label for="plan-step-count">Anzahl der Schritte</label>
+                    <select id="plan-step-count" onchange="renderDailyPlan()">
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div id="daily-plan-grid" class="daily-plan-grid" aria-live="polite"></div>
+                <button id="copy-plan-img-btn" class="btn-secondary plan-copy-btn" type="button" onclick="copyDailyPlanAsImage()">📋 Tagesplan als Bild kopieren</button>
+            </section>
+        </div>
     </main>
 
     <div id="edit-modal-overlay" class="modal-overlay">
@@ -285,7 +552,7 @@
                 <li><strong>Satz eingeben:</strong> Tippe einfach einen deutschen Satz in das Textfeld und klicke auf "Symbole erzeugen" (oder drücke einfach Enter).</li>
                 <li><strong>Wort löschen:</strong> Klicke auf das kleine ✖ oben rechts an einer Karte, um das Wort samt Symbol zu entfernen.</li>
                 <li><strong>Symbole anpassen:</strong> Klicke auf eine beliebige Karte, um aus Alternativ-Symbolen zu wählen oder nach einem komplett anderen Begriff zu suchen.</li>
-                <li><strong>Drag & Drop:</strong> Du kannst die generierten Wortkarten mit der Maus anklicken, festhalten und verschieben, um den Satzbau anzupassen.</li>
+                <li><strong>Schritte füllen:</strong> Nutze das Tagesplan-Panel, um pro Schritt direkt nach einem passenden Piktogramm zu suchen.</li>
                 <li><strong>Funktionswörter:</strong> Wörter wie <em>"der", "und", "in"</em> werden automatisch ohne Bild und gestrichelt dargestellt. Du kannst aber per Klick trotzdem ein Bild dafür suchen.</li>
                 <li><strong>Exportieren:</strong> Nutze <em>"Setzleiste kopieren"</em>, um die fertige Setzleiste direkt in Microsoft Word oder Worksheet Crafter einzufügen.</li>
             </ul>
@@ -315,6 +582,7 @@
         const stemmingSuffixes = ['end', 'en', 'et', 'te', 'st', 'er', 'es', 'e', 't', 'n'];
 
         let boardState = [];
+        let planState = [];
         let currentEditIndex = -1;
         let dragStartIndex = -1;
 
@@ -326,8 +594,13 @@
                     if (data.input) document.getElementById('sentence-input').value = data.input;
                     if (data.state && data.state.length > 0) {
                         boardState = data.state;
+                    }
+                    if (data.planState && Array.isArray(data.planState)) {
+                        planState = data.planState;
+                    }
+                    if (boardState.length > 0) {
                         renderBoard();
-                        setStatusText("Letzter Stand geladen. (Drag & Drop zum Sortieren)");
+                        setStatusText("Letzter Stand geladen.");
                     }
                 } catch(e) { console.error("Speicher Fehler.", e); }
             }
@@ -342,11 +615,25 @@
                     }
                 });
             }
+
+            renderDailyPlan();
         });
+
+        function toggleDailyPlan() {
+            const panel = document.getElementById('daily-plan-panel');
+            const button = document.getElementById('daily-plan-toggle');
+            const isOpen = panel.classList.toggle('open');
+            button.classList.toggle('open', isOpen);
+            button.setAttribute('aria-expanded', String(isOpen));
+            const hint = button.querySelector('.toggle-hint');
+            if (hint) {
+                hint.textContent = isOpen ? 'Klicken zum Einklappen' : 'Klicken zum Ausklappen';
+            }
+        }
 
         function saveState() {
             const input = document.getElementById('sentence-input').value;
-            localStorage.setItem('easyReadData', JSON.stringify({ input, state: boardState }));
+            localStorage.setItem('easyReadData', JSON.stringify({ input, state: boardState, planState }));
         }
 
         function clearState() {
@@ -430,7 +717,7 @@
             });
 
             await Promise.all(fetchPromises);
-            setStatusText(`${fetchedCount} Bilder geladen. Drag & Drop zum Sortieren möglich!`);
+            setStatusText(`${fetchedCount} Bilder geladen.`);
             saveState();
             renderBoard();
         }
@@ -469,7 +756,8 @@
                 card.draggable = true;
                 card.ondragstart = (e) => {
                     dragStartIndex = idx;
-                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', String(idx));
+                    e.dataTransfer.effectAllowed = 'copyMove';
                     setTimeout(() => card.classList.add('dragging'), 0);
                 };
                 card.ondragend = () => card.classList.remove('dragging');
@@ -529,9 +817,142 @@
             renderBoard();
         }
 
+        function renderDailyPlan() {
+            const count = Number(document.getElementById('plan-step-count').value) || 6;
+            const grid = document.getElementById('daily-plan-grid');
+            const oldState = planState.slice(0, count);
+                planState = Array.from({ length: count }, (_, idx) => oldState[idx] || {
+                label: '',
+                query: '',
+                selectedPicId: null,
+                status: 'empty',
+                picHits: []
+            });
+            grid.innerHTML = '';
+
+            planState.forEach((item, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'plan-slot' + (item.selectedPicId ? ' filled' : item.status === 'error' ? ' error' : '');
+
+                const labelInput = document.createElement('input');
+                labelInput.type = 'text';
+                labelInput.className = 'slot-label-input';
+                labelInput.placeholder = `Stunde ${idx + 1}`;
+                labelInput.value = item.label || '';
+                labelInput.onchange = (e) => updatePlanLabel(idx, e.target.value);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.type = 'button';
+                deleteBtn.className = 'slot-delete-btn';
+                deleteBtn.title = 'Symbol entfernen';
+                deleteBtn.innerText = '✖';
+                deleteBtn.onclick = () => clearPlanSlot(idx);
+
+                const searchRow = document.createElement('div');
+                searchRow.className = 'slot-search-row';
+
+                const searchInput = document.createElement('input');
+                searchInput.type = 'text';
+                searchInput.className = 'slot-search-input';
+                searchInput.id = `plan-search-input-${idx}`;
+                searchInput.placeholder = 'z.B. Mathe';
+                searchInput.value = item.query || '';
+                searchInput.onkeydown = (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        searchPlanSlot(idx);
+                    }
+                };
+                searchInput.oninput = (e) => {
+                    if (e.target.value.trim() === '') {
+                        clearPlanSlot(idx);
+                    }
+                };
+
+                const searchBtn = document.createElement('button');
+                searchBtn.type = 'button';
+                searchBtn.className = 'slot-search-btn';
+                searchBtn.title = 'Symbol suchen';
+                searchBtn.innerText = '🔎';
+                searchBtn.onclick = () => searchPlanSlot(idx);
+
+                searchRow.appendChild(searchInput);
+                searchRow.appendChild(searchBtn);
+
+                const preview = document.createElement('div');
+                preview.className = 'slot-preview';
+                if (item.selectedPicId) {
+                    preview.innerHTML = `<img src="https://static.arasaac.org/pictograms/${item.selectedPicId}/${item.selectedPicId}_300.png" alt="Piktogramm"><strong>${item.label || `Stunde ${idx + 1}`}</strong>`;
+                    preview.style.cursor = 'pointer';
+                    preview.onclick = () => openEditModalForPlan(idx);
+                } else {
+                    preview.textContent = 'Noch kein Symbol. Bitte suche ein Piktogramm für dieses Feld.';
+                }
+
+                const status = document.createElement('div');
+                status.className = 'slot-status';
+                if (item.status === 'loading') {
+                    status.textContent = 'Suche läuft...';
+                } else if (item.status === 'error') {
+                    status.textContent = 'Kein Symbol gefunden.';
+                }
+
+                slot.appendChild(labelInput);
+                slot.appendChild(deleteBtn);
+                slot.appendChild(searchRow);
+                slot.appendChild(preview);
+                slot.appendChild(status);
+                grid.appendChild(slot);
+            });
+        }
+
+        function updatePlanLabel(index, value) {
+            if (!planState[index]) return;
+            planState[index].label = value;
+            saveState();
+        }
+
+        function clearPlanSlot(index) {
+            if (!planState[index]) return;
+            planState[index].query = '';
+            planState[index].selectedPicId = null;
+            planState[index].status = 'empty';
+            saveState();
+            renderDailyPlan();
+        }
+
+        async function searchPlanSlot(index) {
+            const input = document.getElementById(`plan-search-input-${index}`);
+            if (!input) return;
+            const query = input.value.trim();
+            if (!query) {
+                clearPlanSlot(index);
+                return;
+            }
+
+            planState[index].query = query;
+            planState[index].status = 'loading';
+            planState[index].selectedPicId = null;
+            renderDailyPlan();
+
+            const hits = await findPictogramsWithFallback(query);
+                if (hits.length > 0 && hits[0]._id) {
+                    planState[index].selectedPicId = hits[0]._id;
+                    planState[index].status = 'done';
+                setStatusText(`Symbol für "${query}" eingefügt.`, true);
+            } else {
+                planState[index].selectedPicId = null;
+                planState[index].status = 'error';
+                setStatusText(`Kein Symbol für "${query}" gefunden.`, false);
+            }
+            saveState();
+            renderDailyPlan();
+        }
+
         /* --- MODAL LOGIK: BEARBEITEN --- */
         function openEditModal(index) {
             currentEditIndex = index;
+            currentPlanSlotIndex = -1;
             const item = boardState[index];
             document.getElementById('modal-word-display').textContent = item.core;
             document.getElementById('modal-search-input').value = item.core;
@@ -539,9 +960,21 @@
             document.getElementById('edit-modal-overlay').classList.add('active');
         }
 
+        function openEditModalForPlan(index) {
+            currentPlanSlotIndex = index;
+            currentEditIndex = -1;
+            const item = planState[index];
+            const title = item.query || item.label || `Stunde ${index + 1}`;
+            document.getElementById('modal-word-display').textContent = title;
+            document.getElementById('modal-search-input').value = item.query || title;
+            renderModalAlternatives(item.picHits);
+            document.getElementById('edit-modal-overlay').classList.add('active');
+        }
+
         function closeEditModal() { 
             document.getElementById('edit-modal-overlay').classList.remove('active'); 
-            currentEditIndex = -1; 
+            currentEditIndex = -1;
+            currentPlanSlotIndex = -1;
         }
 
         /* --- MODAL LOGIK: HILFE --- */
@@ -573,22 +1006,44 @@
             const container = document.getElementById('modal-alternatives');
             container.innerHTML = '<span>Suche läuft...</span>';
             let hits = await findPictogramsWithFallback(term);
-            if (currentEditIndex !== -1) { boardState[currentEditIndex].picHits = hits; saveState(); }
+            if (currentEditIndex !== -1) {
+                boardState[currentEditIndex].picHits = hits;
+                saveState();
+            }
+            if (currentPlanSlotIndex !== -1) {
+                planState[currentPlanSlotIndex].picHits = hits;
+                saveState();
+            }
             renderModalAlternatives(hits);
         }
 
         function selectAlternative(id) {
-            if (currentEditIndex === -1) return;
-            boardState[currentEditIndex].selectedPicId = id;
-            boardState[currentEditIndex].status = 'done';
-            saveState(); closeEditModal(); renderBoard();
+            if (currentEditIndex !== -1) {
+                boardState[currentEditIndex].selectedPicId = id;
+                boardState[currentEditIndex].status = 'done';
+                saveState(); closeEditModal(); renderBoard();
+                return;
+            }
+            if (currentPlanSlotIndex !== -1) {
+                planState[currentPlanSlotIndex].selectedPicId = id;
+                planState[currentPlanSlotIndex].status = 'done';
+                saveState(); closeEditModal(); renderDailyPlan();
+            }
         }
 
         function setNoSymbol() {
-            if (currentEditIndex === -1) return;
-            boardState[currentEditIndex].selectedPicId = null;
-            boardState[currentEditIndex].status = 'error'; 
-            saveState(); closeEditModal(); renderBoard();
+            if (currentEditIndex !== -1) {
+                boardState[currentEditIndex].selectedPicId = null;
+                boardState[currentEditIndex].status = 'error';
+                saveState(); closeEditModal(); renderBoard();
+                return;
+            }
+            if (currentPlanSlotIndex !== -1) {
+                planState[currentPlanSlotIndex].selectedPicId = null;
+                planState[currentPlanSlotIndex].status = 'empty';
+                planState[currentPlanSlotIndex].query = '';
+                saveState(); closeEditModal(); renderDailyPlan();
+            }
         }
 
         /* --- BILD GENERIEREN UND KOPIEREN --- */
@@ -693,6 +1148,102 @@
 
             } catch (e) {
                 alert("Fehler beim Generieren.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function copyDailyPlanAsImage() {
+            const planGrid = document.getElementById('daily-plan-grid');
+            const btn = document.getElementById('copy-plan-img-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Kopiert...';
+            btn.disabled = true;
+
+            try {
+                await document.fonts.ready;
+                const visibleSlots = Array.from(planGrid.querySelectorAll('.plan-slot'));
+                if (visibleSlots.length === 0) {
+                    alert('Bitte erst den Tagesplan öffnen und Schritte wählen.');
+                    return;
+                }
+
+                const cols = visibleSlots.length;
+                const rows = 1;
+                const cardWidth = 320;
+                const cardHeight = 270;
+                const gap = 16;
+                const padding = 20;
+
+                const canvas = document.createElement('canvas');
+                canvas.width = padding * 2 + cols * cardWidth + (cols - 1) * gap;
+                canvas.height = padding * 2 + rows * cardHeight + (rows - 1) * gap;
+                const ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+
+                const imagePromises = planState.map(item => {
+                    return new Promise(resolve => {
+                        if (item.selectedPicId) {
+                            const img = new Image();
+                            img.crossOrigin = 'anonymous';
+                            img.onload = () => resolve({ item, img });
+                            img.onerror = () => resolve({ item, img: null });
+                            img.src = `https://static.arasaac.org/pictograms/${item.selectedPicId}/${item.selectedPicId}_300.png`;
+                        } else {
+                            resolve({ item, img: null });
+                        }
+                    });
+                });
+
+                const loadedImages = await Promise.all(imagePromises);
+
+                loadedImages.forEach((data, index) => {
+                    const { item, img } = data;
+                    const col = index % cols;
+                    const row = Math.floor(index / cols);
+                    const x = padding + col * (cardWidth + gap);
+                    const y = padding + row * (cardHeight + gap);
+
+                    ctx.fillStyle = '#fcf8ef';
+                    ctx.fillRect(x, y, cardWidth, cardHeight);
+                    ctx.strokeStyle = item.selectedPicId ? '#5cbfac' : '#d1d9e0';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash(item.selectedPicId ? [] : [6, 6]);
+                    ctx.strokeRect(x, y, cardWidth, cardHeight);
+                    ctx.setLineDash([]);
+
+                    const label = item.label || `Stunde ${index + 1}`;
+                    ctx.fillStyle = '#2c3e50';
+                    ctx.font = 'bold 16px "Atkinson Hyperlegible", sans-serif';
+                    ctx.fillText(label, x + 14, y + 14);
+
+                    if (img) {
+                        const imgSize = 120;
+                        const imgX = x + (cardWidth - imgSize) / 2;
+                        const imgY = y + 44;
+                        ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
+                    }
+
+                    ctx.font = '14px "Atkinson Hyperlegible", sans-serif';
+                    const description = item.query || (item.selectedPicId ? '' : 'kein Symbol');
+                    ctx.fillText(description, x + 14, y + cardHeight - 32);
+                });
+
+                canvas.toBlob(async blob => {
+                    if (!blob) {
+                        alert('Das Bild konnte nicht erstellt werden.');
+                        return;
+                    }
+                    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+                    setStatusText('✅ Tagesplan kopiert!', true);
+                }, 'image/png', 1.0);
+            } catch (err) {
+                alert('Fehler beim Kopieren des Tagesplans. Bitte prüfen Sie den Browser.');
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
