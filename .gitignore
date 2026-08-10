@@ -13,3 +13,11 @@
 /Test.png
 /Transkript_ JTBD-Interview.pdf
 /Transkript_Usability_Test_JP.pdf
+# Private PDFs, Transkripte & Medien ignorieren
+*.pdf
+*.jpg
+*.png
+*.mp4
+EasyRead*.html
+Research-Bericht*
+gemini-code*
