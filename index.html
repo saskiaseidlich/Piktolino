@@ -539,6 +539,10 @@
         .card-word { font-weight: 700; font-size: 1.2rem; text-align: center; pointer-events: none; }
         .core-word { color: var(--text-primary); }
 
+        .hidden {
+            display: none !important;
+        }
+
         /* Modals */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(44, 62, 80, 0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
@@ -611,6 +615,10 @@
                 bottom: 50px;
                 opacity: 0.5;
             }
+
+            .hidden {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -647,12 +655,12 @@
 
         <div id="setzleiste"></div>
 
-        <button id="daily-plan-toggle" class="daily-plan-toggle" type="button" onclick="toggleDailyPlan()" aria-expanded="false" aria-controls="daily-plan-panel">
+        <button id="daily-plan-toggle" class="daily-plan-toggle hidden" type="button" onclick="toggleDailyPlan()" aria-expanded="false" aria-controls="daily-plan-panel">
             📅 Arbeitsblatt-Vorlage: Tagesplan
             <span class="toggle-hint">Klicken zum Ausklappen</span>
         </button>
 
-        <div id="daily-plan-panel" class="daily-plan-panel">
+        <div id="daily-plan-panel" class="daily-plan-panel hidden">
             <section class="daily-plan-section" aria-labelledby="daily-plan-title">
                 <h2 id="daily-plan-title">Arbeitsblatt-Vorlage: Tagesplan</h2>
                 <p>Wähle die Anzahl der Schulstunden/Schritte und suche das passende Piktogramm direkt pro Feld.</p>
