@@ -359,6 +359,46 @@
             cursor: pointer;
         }
 
+        /* Dark-mode specific tweaks to improve contrast in the Tagesplan */
+        body.dark-theme .daily-plan-controls select,
+        body.dark-theme .daily-plan-controls select option {
+            background-color: #f0f2f5; /* Soft white for the select dropdown */
+            color: #212529; /* Dark text for readability */
+        }
+
+        /* Make all Tagesplan text fields (labels/search) use the same soft-white look */
+        body.dark-theme .plan-slot .slot-label-input,
+        body.dark-theme .plan-slot .slot-search-input,
+        body.dark-theme .custom-search-box input,
+        body.dark-theme .daily-plan-section h2 {
+            background-color: #f0f2f5;
+            color: #212529;
+        }
+
+        body.dark-theme .daily-plan-section h2 {
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* Ensure pictogram preview areas remain bright in dark mode so black outlines stay visible
+           Use the same soft-white as the Tagesplan textfields to avoid visual mismatch */
+        body.dark-theme .plan-slot .slot-preview,
+        body.dark-theme .pic-placeholder {
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            color: #212529;
+        }
+
+        /* Add a light backing behind images/cards in the setzleiste for contrast (same soft-white)
+           keeps visuals consistent between preview boxes and text fields */
+        body.dark-theme .card img,
+        body.dark-theme .card .pictogram {
+            background-color: #f0f2f5;
+            padding: 6px;
+            border-radius: 8px;
+        }
+
         .daily-plan-grid {
             display: flex;
             flex-wrap: nowrap;
